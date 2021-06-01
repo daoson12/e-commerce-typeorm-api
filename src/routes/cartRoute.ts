@@ -3,13 +3,17 @@ const router = Router();
 const verifyToken=require("../config/verifyToken")
 
 import {
-  getAllCarts
+  getAllCarts,
+  getCartById,
+  createNewCart,
+  updateCart,
+  deleteCart
 
 } from "../controllers/Cart.controller";
 router.get("/carts",getAllCarts,verifyToken);
-// router.get("/product/:id", getProductById,verifyToken);
-// router.post("/product", createNewProduct,verifyToken);
-// router.put("/product/:id", updateProduct, verifyToken);
-// router.delete("/product/:id",   deleteProduct, verifyToken);
+router.get("/cart/:id", getCartById,verifyToken);
+router.post("/cart", createNewCart,verifyToken);
+router.put("/product/:id", updateCart, verifyToken);
+router.delete("/product/:id",   deleteCart, verifyToken);
 
 export default router;

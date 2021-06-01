@@ -17,7 +17,7 @@ export const getCartById=async(req:Request, res:Response):Promise<Response>=>{
         return res.status(404).send({ message: 'No user found with ' + req.params.id });
 }
 
-export const CreatNewCart=async (req:Request, res:Response):Promise<Response>=>{
+export const createNewCart=async (req:Request, res:Response):Promise<Response>=>{
     const newCart =await getRepository(Cart).create(req.body);
     const results = await getRepository(Cart).save(newCart);
     if (results) {
