@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Product } from "./Product";
 import { User } from "./User";
 
@@ -12,16 +12,13 @@ export class Cart{
     id:number;
 
     @Column("double", { name: "quanlity", default:0 })
-    quatity:number
+    quanlity:number;
 
-    @Column("double", { name: "Price", default:0 })
-    price:number
-
-    @Column("double", { name: "totalQty", default:0 })
-    totalQty:number
+    @Column("double", { name: "price", default:0 })
+    price:number;
 
     @Column("double", { name: "totalCost", default:0 })
-    totalCost:number
+    totalCost:number;
 
 
     @Column()
@@ -31,8 +28,16 @@ export class Cart{
     product:Product;
 
     @Column()
-    ownerId:number
+    userId:number
     @ManyToOne (()=>User, user => user.cart,{eager:true})
-    @JoinColumn({name:"ownerId"})
-    user:User;    
+    @JoinColumn({name:"userId"})
+    user:User; 
+    
+    @Column()
+    @CreateDateColumn()
+    createAt:Date
+
+    @Column()
+    @UpdateDateColumn()
+    updateAt:Date
 }

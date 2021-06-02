@@ -29,7 +29,7 @@ export class User {
     @Column()
     password:string;
 
-    @OneToMany(()=> Cart, cart=> cart.ownerId)
+    @OneToMany(()=> Cart, cart=> cart.userId)
     cart:Cart[];
 
     @Column()

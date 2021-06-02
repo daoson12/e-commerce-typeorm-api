@@ -8,6 +8,7 @@ import {
   getUserById,
   getUsers,
   updateUser,
+  
 
 } from "../controllers/User.controller";
 router.get("/users", getUsers);
