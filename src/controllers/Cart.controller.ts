@@ -19,31 +19,6 @@ export const getCartById = async (req: Request, res: Response): Promise<Response
     return res.status(404).send({ message: 'No user found with ' + req.params.id });
 }
 
-
-// export const addToCart=async (req:Request, res:Response):Promise<Response>=>{
-//     var quantity=(req.query.body)
-//     var price=parseFloat(req.query.price)
-//     var totalCost=parseFloat(req.query.total)
-//     var ownerId=req.query.ownerId
-
-//     try {
-//         const userById=await getRepository(Cart).findOne(ownerId);
-
-//         if (totalCost) {
-//             totalCost=price*quantity;
-//             const addCart=await getRepository(Cart).save(userById)
-//             return res.status(200).send({ success: true, message: "Deposit was Successful", addCart})
-//         }
-//      else {
-//         return res.status(201).send({ success: false, message: "Invalid" })
-//     }
-
-//     }catch (error) {
-//     return res.status(500).send({ success: false, error, message: "Failed!" })
-// }
-
-
-
 export const createNewCart = async (req: Request, res: Response): Promise<Response> => {
     var qty = req.body.quanlity
     const userId = await getRepository(User).findOne(req.body.userId);
@@ -56,13 +31,9 @@ export const createNewCart = async (req: Request, res: Response): Promise<Respon
         newCart.totalCost = totalCost
         newCart.product = product
         newCart.price = product.price
-
         newCart.user = userId
-
         const data = await getRepository(Cart).save(newCart);
         return res.json({ Success: true, message: "A NEW ITEM HAS BEEN ADDED", data });
-
-
     } else {
         return res.json({ Success: false, message: "proudct not found" });
     }
@@ -75,7 +46,6 @@ export const updateCart = async (req: Request, res: Response): Promise<Response>
     var qty = req.body.quanlity
     const cart = await getRepository(Cart).findOne(req.params.id);
     if (cart) {
-
         const userId = await getRepository(User).findOne(req.body.userId);
         const product = await getRepository(Product).findOne(req.body.product);
         if (userId && product) {
@@ -92,9 +62,6 @@ export const updateCart = async (req: Request, res: Response): Promise<Response>
         } else {
             return res.status(404).send({ message: 'User or product invalid ' });
         }
-        // getRepository(Cart).merge(cart, req.body);
-        // const results = await getRepository(Cart).save(cart);
-        // return res.status(200).send(results);
 
     } else {
         return res.status(404).send({ message: 'No Cart found with ' + req.params.id });
